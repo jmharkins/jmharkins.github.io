@@ -1,0 +1,40 @@
+body {
+  padding-top: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.navbar {
+  background-color: #428bca;
+}
+.navbar-header > a{
+	color:#333;
+}
+.nav > li > a {
+	color:#333;
+}
+.nav >li > a:hover {
+	background-color: #428bca;
+	color:#ffffff;
+}
+
+.home-main {
+	padding-top: 20px;
+}
+
+.home-chunk {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 125%;
+}
+
+.nav .open>a, .nav .open>a:hover, .open>a:visited, .nav .open>a:focus> a{
+   background-color: #428bca;
+}
+
+ul.dropdown-menu {
+	border:none;
+}
