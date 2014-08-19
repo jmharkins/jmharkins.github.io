@@ -3,7 +3,6 @@ var w = 500
     var barh = 20
     var m = [0,0,0,500]
     var tdata;
-    var cdata;
     var dataset;
     var subdata;
     var teamcol;
@@ -27,23 +26,21 @@ d3.json("dta.json", function(error, data) {
           console.log(error);  
 	}
 	else {
-	tdata = data;
-	console.log(tdata);    
+	  tdata = data;   
     up(tdata);
    // set state to 0
- var state = 0;
+   var state = 0;
     
 
    // place first bars
    // return up(tdata);
    }
  });  
- var up = function (dta) { 
+var up = function (dta) { 
 if (state === 1) {
 }
 else {
 if (state === 2) {
-	console.log("Hello");
  //remove text
 	d3.selectAll("text")
 	  .remove();
