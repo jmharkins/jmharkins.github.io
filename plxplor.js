@@ -2,12 +2,15 @@ var plApp = angular.module('plApp', [])
 
 plApp.directive('parallel', function() {
 	return { restrict: 'E',
-			 scope: false, 
+			 scope: {
+			 	idata: "&"
+			 }, 
 			 link: function(scope, element) {
 			 	var width = 500,
 			 	height = 300,
-			 	data = scope.pdata
+			 	data = scope.idata()
 			 	console.log(data)
+			 	console.log(scope)
 			 	var svg = d3.select(element[0])
 			 				.append("svg")
 			 				.attr("width", width)
@@ -21,8 +24,8 @@ plApp.directive('parallel', function() {
 			 					 .text(function(d) {
 			 					 	return d["Player Name"]
 			 					 })
-				scope.$watch('pdata', function(data) { 
-					console.log(data);
+				scope.$watchCollection('idata()', function(data) { 
+					console.log(scope.idata());
 				})
 			 }}
 })
