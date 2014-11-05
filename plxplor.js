@@ -1,6 +1,6 @@
 var plApp = angular.module('plApp', [])
 
-plApp.directive('parallel', function() {
+plApp.directive('testtxt', function() {
 	return { restrict: 'E',
 			 scope: {
 			 	idata: "&"
@@ -16,20 +16,27 @@ plApp.directive('parallel', function() {
 
 				scope.$watchCollection('idata()', function(newData, oldData) { 
 					//console.log(scope.idata());
-					if (newData.length <= oldData.length) {
-						d3.selectAll(".litxt").remove()
-					}
+					// if (newData.length <= oldData.length) {
+					// 	d3.selectAll(".litxt").remove()
+					// }
+					//console.log(newData)
 				 	var testtxt = svg.selectAll(".litxt")
-				 					 .data(newData)
-									 .enter()
-						 		     .append("text")
-						 		     .attr("class", "litxt")
-						 		     .attr("y", function(d,i){
-						 		      return (i+1) * 15
-						 		     })
-						 		     .text(function(d) {
-						 			  return d["Player Name"]
-						 		     })
+				 					 .data(newData, function(d) { 
+				 					 	return d["Player Name"]})
+					testtxt.enter()
+					 	   .append("text")
+					 	   .attr("class", "litxt")
+					       .attr("y", function(d,i){
+						      return (i+1) * 15
+					       })
+					       .text(function(d) {
+					 		  return d["Player Name"]
+					       })
+					var txtUpdate = d3.transition(testtxt)
+									  .attr("y", function(d,i){
+								        return (i+1) * 15
+								      })
+					var txtExit = testtxt.exit().remove()
 				})
 			 }}
 })
