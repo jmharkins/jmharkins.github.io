@@ -56,6 +56,7 @@ plApp.directive("parallel", function() {
 			 				.attr("width", width)
 			 				.attr("height", height)
 
+
 			var series = data.map(function(d) { 
 				return {
 					"club": d.Club,
@@ -83,15 +84,13 @@ plApp.directive("parallel", function() {
 				})
 
 			maxArray.forEach(function(stat) { 
-				var sfn = d3.scale().linear().domain([0,stat.maxval]).range([0,height]);
-				stat.scale = function(inp) {
-					return sfn(inp)
-				}
+				stat.scale = d3.scale.linear().domain([0,stat.maxval]).range([0,height]);
+				console.log(stat)
 			})
 
-			console.log(maxArray)
+			console.log()
 
-
+			
 
 
 		}
