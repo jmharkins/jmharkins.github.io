@@ -40,3 +40,60 @@ plApp.directive('testtxt', function() {
 				})
 			 }}
 })
+
+plApp.directive("parallel", function() {
+	return {
+		restrict: "E",
+		scope: {
+			idata:"&"
+		},
+		link: function(scope,element) { 
+			var width = 500,
+			 	height = 300,
+			 	data = scope.idata()
+			 	var svg = d3.select(element[0])
+			 				.append("svg")
+			 				.attr("width", width)
+			 				.attr("height", height)
+
+			var series = data.map(function(d) { 
+				return {
+					"club": d.Club,
+					"playername": d["Player Name"],
+					"position": d.Position,
+					"stats": d3.keys(d).filter(function(k){ return ["Club","Player Name", "Position"].indexOf(k) == -1 })
+							   .map(function(key) {
+							   	return { 
+							   		"cat": key,
+							   		"val": +d[key]
+							   	}
+							   })
+
+				}
+			})
+
+			var maxArray = series[0].stats.map(function(stat) {
+				return {
+					"stat": stat.cat,
+					"maxval": d3.max(series, function(d) {
+						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
+						return obj[0].val
+						}) 
+					}
+				})
+
+			maxArray.forEach(function(stat) { 
+				var sfn = d3.scale().linear().domain([0,stat.maxval]).range([0,height]);
+				stat.scale = function(inp) {
+					return sfn(inp)
+				}
+			})
+
+			console.log(maxArray)
+
+
+
+
+		}
+	}
+})

@@ -55,7 +55,8 @@
             <li ng-repeat ="player in pdata | filter:searchText ">{{player["Player Name"]}}</li>
           </ul> -->
           <div id ="chart">
-            <testtxt idata="pdata | filter:searchText" ></testtxt>
+            <!-- <testtxt idata="pdata | filter:searchText" ></testtxt> -->
+            <parallel idata="pdata | filter:searchText" ></parallel>
             <!-- | filter:searchText -->
           </div>
         </div>
