@@ -48,13 +48,16 @@ plApp.directive("parallel", function() {
 			idata:"&"
 		},
 		link: function(scope,element) { 
-			var width = 750,
-			 	height = 300,
+			var margin = {top:15, left:50, right:50, bottom:15},
+				width = 900 - margin.left - margin.right,
+			 	height = 500 - margin.top - margin.bottom,
 			 	data = scope.idata()
 			 	var svg = d3.select(element[0])
 			 				.append("svg")
-			 				.attr("width", width)
-			 				.attr("height", height)
+			 				.attr("width", width + margin.left + margin.right)
+			 				.attr("height", height + margin.top + margin.bottom)
+			 				.append("g")
+			 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 			var linefn = d3.svg.line()
 							   .x(function(d){ return d[0]})
@@ -83,6 +86,10 @@ plApp.directive("parallel", function() {
 			var maxArray = series[0].stats.map(function(stat) {
 				return {
 					"stat": stat.cat,
+					"minval": d3.min(series, function(d) {
+						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
+						return obj[0].val
+						}),
 					"maxval": d3.max(series, function(d) {
 						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
 						return obj[0].val
@@ -91,7 +98,7 @@ plApp.directive("parallel", function() {
 				})
 			var  y = {}
 			maxArray.forEach(function(item) { 
-				y[item.stat] = d3.scale.linear().domain([0,item.maxval]).range([height,0]);
+				y[item.stat] = d3.scale.linear().domain([item.minval,item.maxval]).range([height,0]);
 			})
 
 			var lines = svg.append("g")
@@ -101,8 +108,9 @@ plApp.directive("parallel", function() {
 						   .enter()
 						   .append("path")
 						   .attr("d", pathfn)
-						   .attr("stroke", "black")
+						   .attr("stroke", "steelblue")
 						   .attr("stroke-width", 1.5)
+						   .attr("stroke-opacity", 0.25)
 						   .attr("fill", "none")
 
 			function pathfn(d)  {
