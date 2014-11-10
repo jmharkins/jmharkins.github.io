@@ -48,7 +48,7 @@ plApp.directive("parallel", function() {
 			idata:"&"
 		},
 		link: function(scope,element) { 
-			var width = 500,
+			var width = 750,
 			 	height = 300,
 			 	data = scope.idata()
 			 	var svg = d3.select(element[0])
@@ -56,7 +56,10 @@ plApp.directive("parallel", function() {
 			 				.attr("width", width)
 			 				.attr("height", height)
 
-
+			var linefn = d3.svg.line()
+							   .x(function(d){ return d[0]})
+							   .y(function(d){ return d[1]})
+							   .interpolate("linear")
 			var series = data.map(function(d) { 
 				return {
 					"club": d.Club,
@@ -73,6 +76,10 @@ plApp.directive("parallel", function() {
 				}
 			})
 
+			var xscale = d3.scale.linear()
+						   .domain([0,series[0].stats.length])
+						   .range([0, width])
+
 			var maxArray = series[0].stats.map(function(stat) {
 				return {
 					"stat": stat.cat,
@@ -82,16 +89,25 @@ plApp.directive("parallel", function() {
 						}) 
 					}
 				})
-
-			maxArray.forEach(function(stat) { 
-				stat.scale = d3.scale.linear().domain([0,stat.maxval]).range([0,height]);
-				console.log(stat)
+			var  y = {}
+			maxArray.forEach(function(item) { 
+				y[item.stat] = d3.scale.linear().domain([0,item.maxval]).range([height,0]);
 			})
 
-			console.log()
+			var lines = svg.append("g")
+						   .attr("class", "pline")
+						   .selectAll("path")
+						   .data(series)
+						   .enter()
+						   .append("path")
+						   .attr("d", pathfn)
+						   .attr("stroke", "black")
+						   .attr("stroke-width", 1.5)
+						   .attr("fill", "none")
 
-			
-
+			function pathfn(d)  {
+				 return linefn(d.stats.map(function(s,i) { return [xscale(i), y[s.cat](s.val)]; }))
+			}
 
 		}
 	}
