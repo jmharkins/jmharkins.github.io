@@ -108,14 +108,14 @@ plApp.directive("parallel", function() {
 			function brush() {
 				var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
 				extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
-				lines.attr("stroke", function(d) {
+				lines.attr("display", function(d) {
 				  	var sArray = d.stats
-				  	console.log(sArray)
 					return actives.every(function(c, i) {
-						var v = sArray.filter(function(s){ s["cat"] == c.stat})
-						console.log(extents[i][0], v, extents[i][1])
+						var f = sArray.filter(function(s){ return  (s.cat == c.stat)})
+						var v = f[0].val
+						console.log(extents[i][0], f, extents[i][1])
 						return extents[i][0] <= v && v <= extents[i][1];
-					}) ? "steelblue" : "#ddd";
+					}) ? null : "none";
 				});
 			}
 			function axisdraw() {
@@ -161,6 +161,7 @@ plApp.directive("parallel", function() {
 
 					}
 				})	
+				console.log(series)
 				// lines = svg.selectAll(".pline")
 				// 			   .data(series)
 				lines = svg.append("g")
