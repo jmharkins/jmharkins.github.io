@@ -48,7 +48,7 @@ plApp.directive("parallel", function() {
 			idata:"&"
 		},
 		link: function(scope,element) { 
-			var margin = {top:15, left:50, right:50, bottom:15},
+			var margin = {top:20, left:50, right:50, bottom:15},
 				width = 900 - margin.left - margin.right,
 			 	height = 500 - margin.top - margin.bottom,
 			 	data = scope.idata()
@@ -62,10 +62,91 @@ plApp.directive("parallel", function() {
 			var linefn = d3.svg.line()
 							   .x(function(d){ return d[0]})
 							   .y(function(d){ return d[1]})
-							   .interpolate("linear")
+							   .interpolate("monotone")
+			var axis = d3.svg.axis()
+							 .orient("left")
+			var series = data.map(function(d) { 
+				return {
+					"club": d.Club,
+					"playername": d["Player Name"],
+					"position": d.Position,
+					"stats": d3.keys(d).filter(function(k){ return ["Club","Player Name", "Position"].indexOf(k) == -1 })
+							   .map(function(key) {
+							   	return { 
+							   		"cat": key,
+							   		"val": +d[key]
+							   	}
+							   })
+
+				}
+			})
+
+			var lines;
+			var linesExit;
+
+			var xscale = d3.scale.linear()
+						   .domain([0,series[0].stats.length])
+						   .range([0, width])
+
+			var maxArray = series[0].stats.map(function(stat) {
+				return {
+					"stat": stat.cat,
+					"minval": d3.min(series, function(d) {
+						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
+						return obj[0].val
+						}),
+					"maxval": d3.max(series, function(d) {
+						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
+						return obj[0].val
+						}) 
+					}
+				})
+			var  y = {}
+			maxArray.forEach(function(item) { 
+				y[item.stat] = d3.scale.linear().domain([item.minval,item.maxval]).range([height,0]);
+			})
+			function brush() {
+				var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
+				extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
+				lines.attr("stroke", function(d) {
+				  	var sArray = d.stats
+				  	console.log(sArray)
+					return actives.every(function(c, i) {
+						var v = sArray.filter(function(s){ s["cat"] == c.stat})
+						console.log(extents[i][0], v, extents[i][1])
+						return extents[i][0] <= v && v <= extents[i][1];
+					}) ? "steelblue" : "#ddd";
+				});
+			}
+			function axisdraw() {
+				var gaxes = svg.selectAll(".stataxis")
+				.data(maxArray)
+				.enter()
+				.append("g")
+				.attr("class", "stataxis")
+				.attr("transform", function(d,i) { return "translate(" + xscale(i) + ")"; });
+
+				gaxes.append("g")
+				.attr("class", "axis")
+				.each(function(d) { d3.select(this).call(axis.scale(y[d.stat])); })
+				.append("text")
+				.style("text-anchor", "middle")
+				.attr("y", -9)
+				 .text(function(d) { return d.stat; });
+
+				gaxes.append("g")
+					 .attr("class", "brush")
+					 .each(function(d) { d3.select(this).call(y[d.stat].brush = d3.svg.brush().y(y[d.stat]).on("brush", brush) )})
+					 .selectAll("rect")
+					 .attr("x", -8)
+					 .attr("width", 16)
+			}
+			function axisremove() {
+				d3.selectAll(".stataxis").remove()
+			}
 
 			scope.$watchCollection('idata()', function(newData, oldData) { 	
-				var series = newData.map(function(d) { 
+				series = newData.map(function(d) { 
 					return {
 						"club": d.Club,
 						"playername": d["Player Name"],
@@ -79,47 +160,29 @@ plApp.directive("parallel", function() {
 								   })
 
 					}
-				})
-
-				var xscale = d3.scale.linear()
-							   .domain([0,series[0].stats.length])
-							   .range([0, width])
-
-				var maxArray = series[0].stats.map(function(stat) {
-					return {
-						"stat": stat.cat,
-						"minval": d3.min(series, function(d) {
-							var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
-							return obj[0].val
-							}),
-						"maxval": d3.max(series, function(d) {
-							var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
-							return obj[0].val
-							}) 
-						}
-					})
-				var  y = {}
-				maxArray.forEach(function(item) { 
-					y[item.stat] = d3.scale.linear().domain([item.minval,item.maxval]).range([height,0]);
-				})		
-				var lines = svg.selectAll(".pline")
-							   .data(series)
+				})	
+				// lines = svg.selectAll(".pline")
+				// 			   .data(series)
+				lines = svg.append("g")
+						   .attr("class", "pline")
+						   .selectAll("path")
+						   .data(series)
 							
-							lines.enter()
-							     .append("path")
-							     .attr("class", "pline")
+				lines.enter()
+					 .append("path")
+					//.attr("class", "pline")
 							     .attr("d", pathfn)
-							     .attr("stroke", "steelblue")
-							     .attr("stroke-width", 1.5)
-							     .attr("stroke-opacity", 0.25)
-							     .attr("fill", "none")
 
-				var linesExit = lines.exit().remove()
+				linesExit = lines.exit().remove()
+				
+				axisremove();
+				axisdraw();
 
 
 				function pathfn(d)  {
 					 return linefn(d.stats.map(function(s,i) { return [xscale(i), y[s.cat](s.val)]; }))
 				}
+
 			})
 
 		}
