@@ -50,24 +50,35 @@
       <div class="row"  ng-controller= 'plCtrl'>
         <div class="col-lg-12">
           <h2>Premier League Player Data 2013-14</h2>
-          <div>
-          Filter by Player Name: <input ng-model="searchText">
-          <!-- Filter by Position  <input ng-model="searchPos"> -->
-          Filter by Position <select ng-model="searchPos">
-            <option value = "">Show All</option>
-            <option value = "M">Mid</option>
-            <option value = "F">Fwd</option>
-          </select>
-          Filter by Team: <input ng-model = "searchClub">
+                    <h4>Use the filters to view subsets of the full data, and drag brushes onto the axes to filter by ranges for each category.</h4>
+                    <div class = "row">
+            <div class = "col-lg-3">
+            Filter by Player Name: <input ng-model="searchText">
+            </div>
+            <!-- Filter by Position  <input ng-model="searchPos"> -->
+            <div class = "col-lg-3">
+            Filter by Position: <select ng-model="searchPos">
+              <option value = "">Show All</option>
+              <option value = "M">Mid</option>
+              <option value = "F">Fwd</option>
+            </select>
+            </div>
+            <div class = "col-lg-3">
+            Filter by Team: <input ng-model = "searchClub">
+            </div>
           </div>
-<!--           <ul>
-            <li ng-repeat ="player in pdata | filter:searchText ">{{player["Player Name"]}}</li>
-          </ul> -->
           <div id ="chart">
-            <!-- <testtxt idata="pdata | filter:searchText" ></testtxt> -->
             <parallel idata="pdata | filter:{'Player Name': searchText, 'Position': searchPos, 'Club': searchClub}" ></parallel>
-            <!-- | filter:searchText -->
           </div>
+          <div class = "row">
+            <div class = "col-lg-12">
+              Recently, the radar chart has become a popular way to visualize player statistics in soccer. This popularity is in large part thanks to Ted Knutson and his website <a href= "http://statsbomb.com/">StatsBomb</a>. Ted regularly churns out radar charts for players across Europe's top 5 leagues. For example: 
+              <blockquote class="twitter-tweet" lang="en"><p>Leo Messi, Barcelona 10-11. So many green numbers, still just 23. He really isn&#39;t human. 5.86 successful drib90! <a href="http://t.co/VaU5yqgNg8">pic.twitter.com/VaU5yqgNg8</a></p>&mdash; Ted Knutson (@mixedknuts) <a href="https://twitter.com/mixedknuts/status/532844837599727616">November 13, 2014</a></blockquote>
+              Part of the appeal of these charts is that players can be compared using overlays to see where their stats match up and where they differ. You can even overlay a player's previous seasons to see how the his skills or role might have changed over time. While I think these charts offer a lot of insight, I think the radar chart is a bit wanting as a method of conveying information. Comparing overlays in the same category is easy enough, but trying to eyeball differences across categories which are not adjacent on the chart can be tough. A similar method for displaying multi-dimensional data is <a href = "http://en.wikipedia.org/wiki/Parallel_coordinates">parallel coordinates</a>. A parallel coordinates graphic treats the different dimensions of the data as individual axes, and maps each data point to its corresponding position on that axis. One benefit of viewing multi-dimensional data this way is that the number of dimensions is not nearly as limited as in a radar chart or alternative visualization method. For n-dimensional data, a larger n quckly becomes an issue for a radar chart. Parallel coordinates charts are able to handle a larger number of dimensions. Using data from <a href = "http://objective-football.blogspot.com/">Objective Football</a>, I built a graphic which visualizes multi-dimensional player data from the 2013-2014 Premier League season across 178 players from every team. Included are midfielders and forwards who played over 900 minutes. Apart from Age, Minutes, and Shot Percentage, every category is a rate statistic, meaning the number is per 90 minutes played. For stat definitions see Objective Football. 
+            </div>
+          </div>
+          </br>
+          </br>
         </div>
       </div>   
 
@@ -83,6 +94,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="../plxplor.js"></script>
     <script src="../plcontroll.js"></script>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
    <!-- <script type="text/javascript" src="../plcontroll.js"></script> -->
   </body>
 </html>

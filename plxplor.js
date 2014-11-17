@@ -44,7 +44,7 @@ plApp.directive("parallel", function() {
 		},
 		link: function(scope,element) { 
 			var margin = {top:20, left:50, right:50, bottom:15},
-				width = 900 - margin.left - margin.right,
+				width = 1020 - margin.left - margin.right,
 			 	height = 500 - margin.top - margin.bottom,
 			 	data = scope.idata()
 			 	var svg = d3.select(element[0])
@@ -157,6 +157,7 @@ plApp.directive("parallel", function() {
 
 					}
 				})
+				console.log(series)
 				lines = svg.selectAll(".pline")
 							   .data(series, key)
 
@@ -173,6 +174,9 @@ plApp.directive("parallel", function() {
 					 	return d.playername
 					 })
 					 .attr("d", pathfn)
+					 .attr("display", function(){
+					 	return null
+					 })
 				linesExit = lines.exit().remove()
 				
 				axisremove();
