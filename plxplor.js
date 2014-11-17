@@ -15,11 +15,6 @@ plApp.directive('testtxt', function() {
 			 				.attr("height", height)
 
 				scope.$watchCollection('idata()', function(newData, oldData) { 
-					//console.log(scope.idata());
-					// if (newData.length <= oldData.length) {
-					// 	d3.selectAll(".litxt").remove()
-					// }
-					//console.log(newData)
 				 	var testtxt = svg.selectAll(".litxt")
 				 					 .data(newData, function(d) { 
 				 					 	return d["Player Name"]})
@@ -106,18 +101,18 @@ plApp.directive("parallel", function() {
 				y[item.stat] = d3.scale.linear().domain([item.minval,item.maxval]).range([height,0]);
 			})
 
-			// function brush() {
-			// 	var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
-			// 	extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
-			// 	lines.attr("display", function(d) {
-			// 	  	var sArray = d.stats
-			// 		return actives.every(function(c, i) {
-			// 			var f = sArray.filter(function(s){ return  (s.cat == c.stat)})
-			// 			var v = f[0].val;
-			// 			return extents[i][0] <= v && v <= extents[i][1];
-			// 		}) ? null : "none";
-			// 	});
-			// }
+			function brush() {
+				var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
+				extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
+				lines.attr("display", function(d) {
+				  	var sArray = d.stats
+					return actives.every(function(c, i) {
+						var f = sArray.filter(function(s){ return  (s.cat == c.stat)})
+						var v = f[0].val;
+						return extents[i][0] <= v && v <= extents[i][1];
+					}) ? null : "none";
+				});
+			}
 			function axisdraw() {
 				var gaxes = svg.selectAll(".stataxis")
 				.data(maxArray)
@@ -134,19 +129,18 @@ plApp.directive("parallel", function() {
 				.attr("y", -9)
 				 .text(function(d) { return d.stat; });
 
-				// gaxes.append("g")
-				// 	 .attr("class", "brush")
-				// 	 .each(function(d) { d3.select(this).call(y[d.stat].brush = d3.svg.brush().y(y[d.stat]).on("brush", brush) )})
-				// 	 .selectAll("rect")
-				// 	 .attr("x", -8)
-				// 	 .attr("width", 16)
+				gaxes.append("g")
+					 .attr("class", "brush")
+					 .each(function(d) { d3.select(this).call(y[d.stat].brush = d3.svg.brush().y(y[d.stat]).on("brush", brush) )})
+					 .selectAll("rect")
+					 .attr("x", -8)
+					 .attr("width", 16)
 			}
 			function axisremove() {
 				d3.selectAll(".stataxis").remove()
 			}
 
 			scope.$watchCollection('idata()', function(newData, oldData) {
-				console.log(newData)
 				svg.selectAll(".brush").remove()	
 				series = newData.map(function(d) { 
 					return {
@@ -163,16 +157,14 @@ plApp.directive("parallel", function() {
 
 					}
 				})
-				console.log(series)
 				lines = svg.selectAll(".pline")
 							   .data(series, key)
-				// console.log(lines.enter())
-				// console.log(lines.exit())
+
+
 				// lines = svg.append("g")
 				// 		   .attr("class", "pline")
 				// 		   .selectAll("path")
-				// 		   .data(series)
-				console.log(lines.enter())					
+				// 		   .data(series)					
 				lines.enter()
 					 .append("path")
 					 //.attr("transform")
@@ -181,7 +173,6 @@ plApp.directive("parallel", function() {
 					 	return d.playername
 					 })
 					 .attr("d", pathfn)
-				console.log(lines.exit())
 				linesExit = lines.exit().remove()
 				
 				axisremove();

@@ -50,9 +50,16 @@
       <div class="row"  ng-controller= 'plCtrl'>
         <div class="col-lg-12">
           <h2>Premier League Player Data 2013-14</h2>
-          <input ng-model="searchText">
-          <input ng-model="searchPos">
-          <input ng-model = "searchClub">
+          <div>
+          Filter by Player Name: <input ng-model="searchText">
+          <!-- Filter by Position  <input ng-model="searchPos"> -->
+          Filter by Position <select ng-model="searchPos">
+            <option value = "">Show All</option>
+            <option value = "M">Mid</option>
+            <option value = "F">Fwd</option>
+          </select>
+          Filter by Team: <input ng-model = "searchClub">
+          </div>
 <!--           <ul>
             <li ng-repeat ="player in pdata | filter:searchText ">{{player["Player Name"]}}</li>
           </ul> -->
