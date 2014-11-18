@@ -128,8 +128,8 @@ plApp.directive("parallel", function() {
 				.style("text-anchor", "middle")
 				.attr("y", -9)
 				.text(function(d) { return d.stat; })
-				.on("mousedown", function(d){
-					d3.selectAll(".brush").call(y[d.stat].brush.clear())
+				.on("mousedown", function(){
+					d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear() )})
 					d3.selectAll("path").attr("display", null)
 				});
 
