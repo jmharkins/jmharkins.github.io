@@ -102,6 +102,7 @@ plApp.directive("parallel", function() {
 			})
 
 			function brush() {
+				console.log("hello")
 				var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
 				extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
 				lines.attr("display", function(d) {
@@ -129,13 +130,11 @@ plApp.directive("parallel", function() {
 				.attr("y", -9)
 				.text(function(d) { return d.stat; })
 				.on("mousedown", function(d){
-					console.log(d);
-					console.log(y[d.stat].brush.extent());
-					y[d.stat].brush.clear();
-					//d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear) })
+					d3.selectAll(".brush").call(y[d.stat].brush.clear())
+					d3.selectAll("path").attr("display", null)
 				});
 
-				gaxes.append("g")
+				brushes = gaxes.append("g")
 					 .attr("class", "brush")
 					 .each(function(d) { d3.select(this).call(y[d.stat].brush = d3.svg.brush().y(y[d.stat]).on("brush", brush) )})
 					 .selectAll("rect")
@@ -147,8 +146,7 @@ plApp.directive("parallel", function() {
 			}
 
 			scope.$watchCollection('idata()', function(newData, oldData) {
-				
-				d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear) })
+				d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear() )})
 				d3.selectAll("path").attr("display", null)
 				
 				series = newData.map(function(d) { 
