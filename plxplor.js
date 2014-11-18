@@ -102,7 +102,6 @@ plApp.directive("parallel", function() {
 			})
 
 			function brush() {
-				console.log("hello")
 				var actives = maxArray.filter(function(c) { return !y[c.stat].brush.empty(); }),
 				extents = actives.map(function(c) { return y[c.stat].brush.extent(); });
 				lines.attr("display", function(d) {
@@ -164,7 +163,6 @@ plApp.directive("parallel", function() {
 
 					}
 				})
-				console.log(series)
 				lines = svg.selectAll(".pline")
 							   .data(series, key)
 

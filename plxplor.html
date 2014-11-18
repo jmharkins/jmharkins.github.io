@@ -16,7 +16,7 @@
 
   </head>
 
-  <body ng-app="plApp">
+  <body>
 
     <div class="navbar navbar-fixed-top" role="navigation">
       <div class="container">
@@ -33,11 +33,11 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="../index.html">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="../prem.html">EPL Goals Chart</a></li>
+                <li><a href="../premchart.html">EPL Goals Chart</a></li>
                 <li><a href="../nhl.html">NHL Goalie Chart</a></li>
                 <li><a href="#">EPL Player Stats Explorer</a></li>
               </ul>
@@ -47,12 +47,12 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" ng-app="plApp">
       <div class="row"  ng-controller= 'plCtrl'>
         <div class="col-lg-12">
           <h2>Premier League Player Data 2013-14</h2>
-                    <h4>Use the filters to view subsets of the full data, and drag brushes onto the axes to filter by ranges for each category. Remove brushes by clicking on the category name.</h4>
-                    <div class = "row">
+          <h4>Use the filters to view subsets of the full data, and drag brushes onto the axes to filter by ranges for each category. Remove brushes by clicking on the category name.</h4>
+          <div class = "row">
             <div class = "col-lg-3">
             Filter by Player Name: <input ng-model="searchText">
             </div>
@@ -89,13 +89,12 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
-    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="../plxplor.js"></script>
     <script src="../plcontroll.js"></script>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
-   <!-- <script type="text/javascript" src="../plcontroll.js"></script> -->
   </body>
 </html>
