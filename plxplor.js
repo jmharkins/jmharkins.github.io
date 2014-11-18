@@ -127,7 +127,13 @@ plApp.directive("parallel", function() {
 				.append("text")
 				.style("text-anchor", "middle")
 				.attr("y", -9)
-				 .text(function(d) { return d.stat; });
+				.text(function(d) { return d.stat; })
+				.on("mousedown", function(d){
+					console.log(d);
+					console.log(y[d.stat].brush.extent());
+					y[d.stat].brush.clear();
+					//d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear) })
+				});
 
 				gaxes.append("g")
 					 .attr("class", "brush")
@@ -141,7 +147,10 @@ plApp.directive("parallel", function() {
 			}
 
 			scope.$watchCollection('idata()', function(newData, oldData) {
-				svg.selectAll(".brush").remove()	
+				
+				d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear) })
+				d3.selectAll("path").attr("display", null)
+				
 				series = newData.map(function(d) { 
 					return {
 						"club": d.Club,
