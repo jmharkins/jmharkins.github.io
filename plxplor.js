@@ -186,7 +186,7 @@ plApp.directive("parallel", function() {
 					 .on("mouseover", function(d) {
 					 	var pdatum = d3.select(this).data()
 					 	var lastStat = pdatum[0].stats[pdatum[0].stats.length-1] ;
-					 	d3.select(this).attr("stroke","yellow")
+					 	d3.select(this).attr("stroke","firebrick")
 					 	svg.selectAll(".plabel")
 					 	   .data(pdatum)
 					 	   .enter()
