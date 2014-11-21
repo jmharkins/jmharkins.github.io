@@ -179,8 +179,31 @@ plApp.directive("parallel", function() {
 					 	return d.playername
 					 })
 					 .attr("d", pathfn)
+					 .attr("stroke", "steelblue")
 					 .attr("display", function(){
 					 	return null
+					 })
+					 .on("mouseover", function(d) {
+					 	var pdatum = d3.select(this).data()
+					 	var lastStat = pdatum[0].stats[pdatum[0].stats.length-1] ;
+					 	d3.select(this).attr("stroke","yellow")
+					 	svg.selectAll(".plabel")
+					 	   .data(pdatum)
+					 	   .enter()
+					 	   .append("text")
+					 	   .attr("class", "plabel")
+					 	   .attr("x", width- margin.left - 5)
+					 	   .attr("y", function(p) {
+					 	   	console.log(y[lastStat.cat](lastStat.val))
+					 	   	return y[lastStat.cat](lastStat.val)
+					 	   })
+					 	   .text(function(p){
+					 	   	return p.playername
+					 	   })
+					 })
+					 .on("mouseout", function(d){
+					 	d3.select(this).attr("stroke","steelblue")
+					 	d3.select(".plabel").remove()
 					 })
 				linesExit = lines.exit().remove()
 				
