@@ -75,6 +75,10 @@ ul.dropdown-menu {
   shape-rendering: crispEdges;
 }
 
+.plabel {
+  font-size: 11px
+}
+
 
 #tooltip {
         position: absolute;
