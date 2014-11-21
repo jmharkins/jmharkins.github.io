@@ -52,7 +52,7 @@ ul.dropdown-menu {
 }
 
 .pline {
-	stroke: steelblue;
+/*	stroke: steelblue; */
 	stroke-width: 1.5;
 	stroke-opacity:; 0.25;
 	fill: none;
