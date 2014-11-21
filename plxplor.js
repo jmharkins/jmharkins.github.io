@@ -186,7 +186,7 @@ plApp.directive("parallel", function() {
 					 .on("mouseover", function(d) {
 					 	var pdatum = d3.select(this).data()
 					 	var lastStat = pdatum[0].stats[pdatum[0].stats.length-1] ;
-					 	d3.select(this).transition().duration(200).attr("stroke","yellow")
+					 	d3.select(this).attr("stroke","yellow")
 					 	svg.selectAll(".plabel")
 					 	   .data(pdatum)
 					 	   .enter()
@@ -202,7 +202,7 @@ plApp.directive("parallel", function() {
 					 	   })
 					 })
 					 .on("mouseout", function(d){
-					 	d3.select(this).transition().duration(200).attr("stroke","steelblue")
+					 	d3.select(this).transition().duration(500).attr("stroke","steelblue")
 					 	d3.select(".plabel").remove()
 					 })
 				linesExit = lines.exit().remove()
