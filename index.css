@@ -1,40 +1,30 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
-  padding-top: 50px;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
 
-.navbar {
-  background-color: #428bca;
+#siteheader {
+  margin-top: 25px;
+  margin-left: 50px;
 }
-.navbar-header > a{
-	color:#333;
+.siteheader {
+  display:inline-block;
 }
-.nav > li > a {
-	color:#333;
+#siteheader-svg {
+  margin-left: 25px;
+  margin-right: 25px;
 }
-.nav >li > a:hover {
-	background-color: #428bca;
-	color:#ffffff;
+#home-link {
+  margin-left: 25px;
 }
-
-.home-main {
-	padding-top: 20px;
+#siteheader-list {
+  margin-left: 25px;
 }
-
-.home-chunk {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-size: 125%;
-}
-
-.nav .open>a, .nav .open>a:hover, .open>a:visited, .nav .open>a:focus> a{
-   background-color: #428bca;
-}
-
-ul.dropdown-menu {
-	border:none;
+#siteheader-list li {
+  display:inline;
+  margin-left: 25px;
 }
