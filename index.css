@@ -79,3 +79,7 @@ Work Styles
   border: 5px solid #000000;
   margin-bottom: 15px;
 }
+
+#work-ilist li img:hover {
+  opacity: 0.3;
+}
