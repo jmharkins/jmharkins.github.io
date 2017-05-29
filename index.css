@@ -21,17 +21,22 @@ Header Styles
 .siteheader {
   display:inline-block;
 }
+.siteheader h2 {
+  display: inline;
+}
+#siteheader-nav {
+  vertical-align: middle;
+}
 #siteheader-svg {
   margin-left: 25px;
   margin-right: 25px;
+    vertical-align: top;
 }
 #home-link {
   display: inline;
   margin-left: 0px;
   text-decoration: none;
-  /*color: #000000;*/
 }
-
 #siteheader-list {
   margin-left: 25px;
 }
@@ -42,7 +47,6 @@ Header Styles
 
 #siteheader-list li a {
   text-decoration: none;
-  /*color: #000000;*/
 }
 
 /***************
