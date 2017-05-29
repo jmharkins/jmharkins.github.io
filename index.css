@@ -1,10 +1,13 @@
 * {
   margin: 0px;
   padding: 0px;
+  color: #404040;
+  background-color: #f2f2f2
+
 }
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
 /***************
@@ -23,9 +26,10 @@ Header Styles
   margin-right: 25px;
 }
 #home-link {
-  margin-left: 25px;
+  display: inline;
+  margin-left: 0px;
   text-decoration: none;
-  color: #000000;
+  /*color: #000000;*/
 }
 
 #siteheader-list {
@@ -38,7 +42,15 @@ Header Styles
 
 #siteheader-list li a {
   text-decoration: none;
-  color: #000000;
+  /*color: #000000;*/
+}
+
+/***************
+SVG Styles
+****************/
+
+#siteheader-svg .line {
+  fill: ##404040;
 }
 
 /***************
@@ -76,7 +88,7 @@ Work Styles
   width:50%
 }
 #work-ilist li img {
-  border: 5px solid #000000;
+  border: 5px solid #404040;
   margin-bottom: 15px;
 }
 
