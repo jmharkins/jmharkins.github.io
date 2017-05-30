@@ -2,73 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>J. Harkins</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
-    <link href="../work.css" rel="stylesheet">
+    <link  rel="stylesheet" type="text/css" href="work.css">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
   </head>
 
   <body>
-
-    <div class="navbar navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="../index.html">Johannes Harkins 
-            <span class="glyphicon glyphicon-stats"></span>
-          </a>
+    <div class= 'siteheader' id="siteheader">
+        <div class='siteheader', id='siteheader-nav'>
+            <h2><a id='home-link' href="index.html">Johannes Harkins</a></h2>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="../index.html">Home</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="../premchart.html">EPL Goals Chart</a></li>
-                <li><a href="#">NHL Goalie Chart</a></li>
-                <li><a href="../plxplor.html">EPL Player Stats Explorer</a></li>
-              </ul>
-            </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-      </div>
     </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h2>NHL Goalie Chart</h2>
-          <p>Inspired by graphics at the <a href = "http://www.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/">New York Times</a> and <a href= "http://regressing.deadspin.com/which-nfl-teams-have-started-the-most-quarterbacks-199-1467826931">Deadspin</a>, this chart displays the number of games each goalie played for all NHL teams from 2000-2013. Goalies are only included if they played more than 5 games for that team. The teams are ordered by the number of different goalies who have played for them during this period. Note that each team has not played the same number of games during this time period, since the data include playoff games. Data from Hockey Reference. </p>
-          <div id ="chart">
-            <div id="tooltip" class="hidden">
-            <p><span id="value">100</span></p>
-            </div>
+    <div id="work-container">
+          <div id="work-text">
+            <h2>NHL Goalie Chart</h2>
+            <p>Inspired by graphics at the <a href = "http://www.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/">New York Times</a> and <a href= "http://regressing.deadspin.com/which-nfl-teams-have-started-the-most-quarterbacks-199-1467826931">Deadspin</a>, this chart displays the number of games each goalie played for all NHL teams from 2000-2013. Goalies are only included if they played more than 5 games for that team. The teams are ordered by the number of different goalies who have played for them during this period. Note that each team has not played the same number of games during this time period, since the data include playoff games. Data from Hockey Reference.
+            </p>
           </div>
-        <div class = "spacer">
-          <p>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>  
-          </p>
-        </div> 
-      </div>
-
+          <div id ="chart">
+              <div id="tooltip" class="hidden">
+              <p><span id="value">100</span></p>
+              </div>
+          </div>
+          <div class = "spacer">
+            <p>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+            </p>
+          </div>
 
     </div><!-- /.container -->
 
@@ -77,9 +50,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="jquery.tipsy.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+    <!-- <script type='text/javascript' src='jquery.tipsy.js'></script> -->
     <script src="../nhl.js"></script>
   </body>
 </html>
