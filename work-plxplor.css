@@ -63,22 +63,61 @@ Work Styles
 ****************/
 #work-container {
   margin-top: 50px;
-  margin-left: 0px;
+  margin-left: 50px;
   width:80%
 }
 #work-text {
   margin-top: 50px;
-  margin-left: 50px;
+}
+#work-post-text {
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+#work-control {
+  margin-top: 15px;
+}
+
+.app-control {
+  display: inline;
 }
 
 #chart {
-
+  font-family: sans-serif;
   margin-top: 25px;
   outline: 2px solid;
   width: 100%;
-  margin-left: 50px;
   max-width: 1030px;
+  min-width: 1030px
 }
+
+.pline {
+/*	stroke: steelblue; */
+	stroke-width: 1.5;
+	stroke-opacity:; 0.25;
+	fill: none;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.plabel {
+  font-size: 11px
+}
+
 
 #tooltip {
         position: absolute;
