@@ -1,0 +1,105 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  color: #404040;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #f2f2f2
+
+}
+
+/***************
+Header Styles
+****************/
+
+#siteheader {
+  margin-top: 25px;
+  margin-left: 50px;
+}
+.siteheader {
+  display:inline-block;
+}
+.siteheader h2 {
+  display: inline;
+}
+#siteheader-nav {
+  vertical-align: middle;
+}
+#siteheader-svg {
+  margin-left: 25px;
+  margin-right: 25px;
+    vertical-align: top;
+}
+#home-link {
+  display: inline;
+  margin-left: 0px;
+  text-decoration: none;
+}
+#siteheader-list {
+  margin-left: 25px;
+}
+#siteheader-list li {
+  display:inline;
+  margin-left: 25px;
+}
+
+#siteheader-list li a {
+  text-decoration: none;
+}
+
+/***************
+SVG Styles
+****************/
+
+#siteheader-svg .line {
+  fill: ##404040;
+}
+
+
+/***************
+Work Styles
+****************/
+#work-container {
+  margin-top: 50px;
+  margin-left: 0px;
+  width:80%
+}
+#work-text {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+#chart {
+
+  margin-top: 25px;
+  outline: 2px solid;
+  width: 100%;
+  margin-left: 50px;
+  max-width: 1030px
+}
+
+#tooltip {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+}
+
+#tooltip.hidden {
+        display: none;
+}
+
+#tooltip > p {
+        margin: 0;
+        font-family: sans-serif;
+}
