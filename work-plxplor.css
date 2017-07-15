@@ -68,10 +68,12 @@ Work Styles
 }
 #work-text {
   margin-top: 50px;
+  width: 80%
 }
 #work-post-text {
-  margin-top: 15px;
+  margin-top: 0px;
   margin-bottom: 50px;
+  width: 80%
 }
 #work-control {
   margin-top: 15px;
@@ -84,7 +86,6 @@ Work Styles
 #chart {
   font-family: sans-serif;
   margin-top: 25px;
-  outline: 2px solid;
   width: 100%;
   max-width: 1030px;
   min-width: 1030px
