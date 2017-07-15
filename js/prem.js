@@ -21,7 +21,7 @@ var w = 500
       .on("click", function() {
         return up(tdata)
       });
-d3.json("dta.json", function(error, data) {
+d3.json("../data/dta.json", function(error, data) {
 	if (error) {  //If error is not null, something went wrong.
           console.log(error);
 	}

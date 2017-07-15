@@ -10,7 +10,7 @@ var w = 1100;
 	var svgBox = d3.select('#chart')[0][0].getBoundingClientRect()
 	var mouseOrigin = [svgBox.left, svgBox.top];
 
- d3.json("nhl.json", function(error, data) {
+ d3.json("../data/nhl.json", function(error, data) {
 	if (error) {  //If error is not null, something went wrong.
        console.log(error);
 	}
