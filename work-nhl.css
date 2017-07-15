@@ -64,11 +64,12 @@ Work Styles
 #work-container {
   margin-top: 50px;
   margin-left: 0px;
-  width:80%
+  width:80%;
 }
 #work-text {
   margin-top: 50px;
   margin-left: 50px;
+  width:80%;
 }
 
 #chart {
