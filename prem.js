@@ -11,32 +11,32 @@ var w = 500
      var svg = d3.select("#chart")
          .append("svg")
          .attr("width", w + m[3])
-         .attr("height", h); 
+         .attr("height", h);
    //place background rect
    svg.append("rect")
       .attr("class", "background")
       .attr("width", w + m[3])
       .attr("height",h)
-      .attr("fill", "white")
+      .attr("fill", "#f2f2f2")
       .on("click", function() {
         return up(tdata)
       });
 d3.json("dta.json", function(error, data) {
 	if (error) {  //If error is not null, something went wrong.
-          console.log(error);  
+          console.log(error);
 	}
 	else {
-	  tdata = data;   
+	  tdata = data;
     up(tdata);
    // set state to 0
    var state = 0;
-    
+
 
    // place first bars
    // return up(tdata);
    }
- });  
-var up = function (dta) { 
+ });
+var up = function (dta) {
 if (state === 1) {
 }
 else {
@@ -46,22 +46,22 @@ if (state === 2) {
 	  .remove();
 // remove lines
 	d3.selectAll("line")
-	  .remove();  	
+	  .remove();
  	// remove rectangles
    svg.selectAll(".b2")
 	  .attr("fill", function() {
 	  	return teamcol;
-	  }) 
+	  })
 	  .on("mouseover", function() {
 	  	})
 	  .transition()
-	  .duration(1000) 
+	  .duration(1000)
 	  .delay( function(d,i){
 	  	 return i * (1000 / subdata.length);
 	  	})
-	  .attr("y", -50) // want to have bars exit differently?	
-	  .remove(); 
- 	} 	
+	  .attr("y", -50) // want to have bars exit differently?
+	  .remove();
+ 	}
       //key fns
     var club = function(d) {
     return d.club;
@@ -72,22 +72,22 @@ if (state === 2) {
     var col = function(d) {
       return d.col
     };
-    
+
     var players = function(d) {
-      return d.players 
+      return d.players
     };
 
     dataset = dta;
-    // set scales 
+    // set scales
     var yScale = d3.scale.ordinal()
 							.domain(d3.range(dataset.length))
-							.rangeRoundBands([0, h], 0.05);						
+							.rangeRoundBands([0, h], 0.05);
     var xScale = d3.scale.linear()
 							.domain([0, d3.max(dataset, function(d) {
-							return d.gf;	
+							return d.gf;
 							})])
 							.range([0, w]);
-  // adding rectangles							
+  // adding rectangles
     svg.selectAll("g")
        .data(dataset, club)
        .enter()
@@ -98,8 +98,8 @@ if (state === 2) {
  	           })
  	   .attr("ccol", function(d) {
  	   	      return d.col;
- 	   })       
-   
+ 	   })
+
  	   .attr("width", function(d) {
 			   	 return xScale(d.gf)
 			   })
@@ -110,7 +110,7 @@ if (state === 2) {
        d3.selectAll(".b1")
          .attr("y", function(d, i) {
           return yScale(i);
-         }); 
+         });
      } else {
        d3.selectAll(".b1")
          .attr("y", h + 50)
@@ -118,14 +118,14 @@ if (state === 2) {
          .duration(2000)
          .delay(function(d, i) {
               return 1000 + (i+1)*(1000 /tdata.length);
-            }) 
+            })
          .attr("y", function(d, i) {
           return yScale(i);
          });   ;
      }
-	  
 
-    // generate text			   
+
+    // generate text
     svg.selectAll("text")
        .data(dataset, club)
        .enter()
@@ -143,7 +143,7 @@ if (state === 2) {
 	   if (state == 2) {
 	   svg.selectAll("text").transition()
 	   .duration(3500)
-	   .delay(3500)   
+	   .delay(3500)
 	   .attr("y", function(d, i) {
 			   		return yScale(i) + (yScale.rangeBand() / 2) + 2;
 			   });
@@ -152,10 +152,10 @@ if (state === 2) {
 	  svg.selectAll("text").attr("y", function(d, i) {
 			   		return yScale(i) + (yScale.rangeBand() / 2) + 2;
 			   });
-	   }				   		   
+	   }
 	// mouse over interaction
-       d3.selectAll(".b1")	   
-	     .on("mouseover", function(d, i) { 	
+       d3.selectAll(".b1")
+	     .on("mouseover", function(d, i) {
       	      // dim other bars
        	         d3.selectAll(".b1")
        	           .filter(function(datum, j) {
@@ -171,14 +171,14 @@ if (state === 2) {
        	     //add line
        	     var xPlace = parseInt(d3.select(this).attr("width")) + 5;
        	     var yStart = parseInt(d3.select(this).attr("y")) + yScale.rangeBand() / 2;
-       	     var clubnm = d3.select(this).attr("id"); 
+       	     var clubnm = d3.select(this).attr("id");
        	    svg.append("line")
           	   .attr("id", "cpointer")
                .attr("x1", xPlace)
                .attr("x2", xPlace)
                .attr("y1", yStart)
                .attr("y2", yStart)
-               .attr("stroke", "black") 
+               .attr("stroke", "black")
                .transition()
                .duration(250)
                .attr("x2", 700);
@@ -192,19 +192,19 @@ if (state === 2) {
                .attr("y", yStart + 3.5)
                .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-               .attr("fill", "black");   
+               .attr("fill", "black");
               })
-          // mouse out    
+          // mouse out
         .on("mouseout", function(d) {
               d3.selectAll(".b1")
                 .style("opacity", 0.85)
                 .attr("fill", "steelblue");
               d3.selectAll("text")
-                .style("opacity", 1); 
-              d3.select("#cpointer").remove(); 
+                .style("opacity", 1);
+              d3.select("#cpointer").remove();
               d3.select("#clubname").remove();
               })
-         // click     
+         // click
        .on("click", function(d) {
            	subdata = d.players;
            	console.log(subdata);
@@ -212,17 +212,17 @@ if (state === 2) {
            	down(subdata);
            });
        // set state to 1
-   state = 1;          
- }};                   
+   state = 1;
+ }};
 var down = function (subdataset)  {
   state = 2;
   console.log(teamcol);
   var yScale = d3.scale.ordinal()
               .domain(d3.range(subdataset.length))
-              .rangeRoundBands([0, h], 0.05);           
+              .rangeRoundBands([0, h], 0.05);
   var xScale = d3.scale.linear()
               .domain([0, d3.max(subdataset, function(d) {
-              return d.g;  
+              return d.g;
               })])
               .range([0, w]);
   var name = function(d) {
@@ -231,10 +231,10 @@ var down = function (subdataset)  {
   var g = function(d) {
     return d.g;
   };
-   // remove text   
+   // remove text
   d3.selectAll("text")
     .remove();
-   // remove lines   
+   // remove lines
   d3.selectAll("line")
     .remove();
   // transition out old bars
@@ -276,7 +276,7 @@ var down = function (subdataset)  {
     .attr("y", function(d, i) {
           return yScale(i);
     });
-    
+
     // generate text
     svg.selectAll("text")
        .data(subdataset)
@@ -294,13 +294,13 @@ var down = function (subdataset)  {
 			   .attr("fill", "gainsboro")
 	   .transition()
 	   .duration(3500)
-	   .delay(3500)   
+	   .delay(3500)
 	   .attr("y", function(d, i) {
 			   		return yScale(i) + (yScale.rangeBand() / 2) + 2;
 			   });
 	// mouse over interaction
-       d3.selectAll(".b2")	   
-	     .on("mouseover", function(d, i) { 	
+       d3.selectAll(".b2")
+	     .on("mouseover", function(d, i) {
       	      // dim other bars
        	         d3.selectAll(".b2")
        	           .filter(function(datum, j) {
@@ -316,14 +316,14 @@ var down = function (subdataset)  {
        	     //add line
        	     var xPlace = parseInt(d3.select(this).attr("width")) + 5;
        	     var yStart = parseInt(d3.select(this).attr("y")) + yScale.rangeBand() / 2;
-       	     var playernm = d3.select(this).attr("id"); 
+       	     var playernm = d3.select(this).attr("id");
        	    svg.append("line")
           	   .attr("id", "playerpointer")
                .attr("x1", xPlace)
                .attr("x2", xPlace)
                .attr("y1", yStart)
                .attr("y2", yStart)
-               .attr("stroke", "black") 
+               .attr("stroke", "black")
                .transition()
                .duration(250)
                .attr("x2", 700);
@@ -337,9 +337,9 @@ var down = function (subdataset)  {
                .attr("y", yStart + 3.5)
                .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-               .attr("fill", "black");   
+               .attr("fill", "black");
               })
-          // mouse out    
+          // mouse out
         .on("mouseout", function(d) {
               d3.selectAll(".b2")
                 .style("opacity", 0.85)
@@ -347,13 +347,9 @@ var down = function (subdataset)  {
                 return teamcol;
                 });
               d3.selectAll("text")
-                .style("opacity", 1); 
-              d3.select("#playerpointer").remove(); 
+                .style("opacity", 1);
+              d3.select("#playerpointer").remove();
               d3.select("#playername").remove();
-              })		    
+              })
 
-};		   	       
- 
- 
-
-	
+};
