@@ -4,7 +4,7 @@ plApp.directive('testtxt', function() {
 	return { restrict: 'E',
 			 scope: {
 			 	idata: "&"
-			 }, 
+			 },
 			 link: function(scope, element) {
 			 	var width = 500,
 			 	height = 300,
@@ -14,9 +14,9 @@ plApp.directive('testtxt', function() {
 			 				.attr("width", width)
 			 				.attr("height", height)
 
-				scope.$watchCollection('idata()', function(newData, oldData) { 
+				scope.$watchCollection('idata()', function(newData, oldData) {
 				 	var testtxt = svg.selectAll(".litxt")
-				 					 .data(newData, function(d) { 
+				 					 .data(newData, function(d) {
 				 					 	return d["Player Name"]})
 					testtxt.enter()
 					 	   .append("text")
@@ -42,7 +42,7 @@ plApp.directive("parallel", function() {
 		scope: {
 			idata:"&"
 		},
-		link: function(scope,element) { 
+		link: function(scope,element) {
 			var margin = {top:20, left:50, right:50, bottom:15},
 				width = 1020 - margin.left - margin.right,
 			 	height = 500 - margin.top - margin.bottom,
@@ -60,14 +60,14 @@ plApp.directive("parallel", function() {
 							   .interpolate("monotone")
 			var axis = d3.svg.axis()
 							 .orient("left")
-			var series = data.map(function(d) { 
+			var series = data.map(function(d) {
 				return {
 					"club": d.Club,
 					"playername": d["Player Name"],
 					"position": d.Position,
 					"stats": d3.keys(d).filter(function(k){ return ["Club","Player Name", "Position"].indexOf(k) == -1 })
 							   .map(function(key) {
-							   	return { 
+							   	return {
 							   		"cat": key,
 							   		"val": +d[key]
 							   	}
@@ -93,11 +93,11 @@ plApp.directive("parallel", function() {
 					"maxval": d3.max(series, function(d) {
 						var obj = d.stats.filter(function(s) { return s.cat == stat.cat})
 						return obj[0].val
-						}) 
+						})
 					}
 				})
 			var  y = {}
-			maxArray.forEach(function(item) { 
+			maxArray.forEach(function(item) {
 				y[item.stat] = d3.scale.linear().domain([item.minval,item.maxval]).range([height,0]);
 			})
 
@@ -126,7 +126,7 @@ plApp.directive("parallel", function() {
 				.each(function(d) { d3.select(this).call(axis.scale(y[d.stat])); })
 				.append("text")
 				.style("text-anchor", "middle")
-				.attr("y", -9)
+				.attr("y", -8)
 				.text(function(d) { return d.stat; })
 				.on("mousedown", function(){
 					d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear() )})
@@ -147,15 +147,15 @@ plApp.directive("parallel", function() {
 			scope.$watchCollection('idata()', function(newData, oldData) {
 				d3.selectAll(".brush").each(function(d) { d3.select(this).call(y[d.stat].brush.clear() )})
 				d3.selectAll("path").attr("display", null)
-				
-				series = newData.map(function(d) { 
+
+				series = newData.map(function(d) {
 					return {
 						"club": d.Club,
 						"playername": d["Player Name"],
 						"position": d.Position,
 						"stats": d3.keys(d).filter(function(k){ return ["Club","Player Name", "Position"].indexOf(k) == -1 })
 								   .map(function(key) {
-								   	return { 
+								   	return {
 								   		"cat": key,
 								   		"val": +d[key]
 								   	}
@@ -170,7 +170,7 @@ plApp.directive("parallel", function() {
 				// lines = svg.append("g")
 				// 		   .attr("class", "pline")
 				// 		   .selectAll("path")
-				// 		   .data(series)					
+				// 		   .data(series)
 				lines.enter()
 					 .append("path")
 					 //.attr("transform")
@@ -194,7 +194,6 @@ plApp.directive("parallel", function() {
 					 	   .attr("class", "plabel")
 					 	   .attr("x", width- margin.left - 5)
 					 	   .attr("y", function(p) {
-					 	   	console.log(y[lastStat.cat](lastStat.val))
 					 	   	return y[lastStat.cat](lastStat.val)
 					 	   })
 					 	   .text(function(p){
@@ -206,11 +205,11 @@ plApp.directive("parallel", function() {
 					 	d3.select(".plabel").remove()
 					 })
 				linesExit = lines.exit().remove()
-				
+
 				axisremove();
 				axisdraw();
 			})
-			
+
 			function key(d) {
 				return d.playername
 			}
