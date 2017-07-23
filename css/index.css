@@ -69,6 +69,13 @@ About Styles
   margin-top: 25px;
 }
 
+.about-txt {
+  margin-bottom: 25px;
+}
+#about ul {
+  margin-left: 25px;
+}
+
 /***************
 Work Styles
 ****************/
