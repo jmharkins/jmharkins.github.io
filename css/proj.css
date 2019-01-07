@@ -1,0 +1,74 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  color: #404040;
+  background-color: #f2f2f2
+
+}
+
+body {
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+/***************
+Header Styles
+****************/
+
+#siteheader {
+  margin-top: 25px;
+  margin-left: 50px;
+}
+.siteheader {
+  display:inline-block;
+}
+.siteheader h2 {
+  display: inline;
+}
+#siteheader-nav {
+  vertical-align: middle;
+}
+#siteheader-svg {
+  margin-left: 25px;
+  margin-right: 25px;
+    vertical-align: top;
+}
+#home-link {
+  display: inline;
+  margin-left: 0px;
+  text-decoration: none;
+}
+#siteheader-list {
+  margin-left: 25px;
+}
+#siteheader-list li {
+  display:inline;
+  margin-left: 25px;
+}
+
+#siteheader-list li a {
+  text-decoration: none;
+}
+
+/***************
+About Styles
+****************/
+#projects {
+  margin-top: 50px;
+  margin-left: 50px;
+  width:80%;
+}
+#projects-body {
+  margin-top: 25px;
+}
+
+.projects-txt {
+  margin-bottom: 25px;
+}
+
+#projects ul {
+  margin-left: 25px;
+}
+
+#projects li {
+  margin-bottom: 10px;
+}
